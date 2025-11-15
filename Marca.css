@@ -1,0 +1,130 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* ===== HEADER ===== */
+header {
+    background: #00883E; /* VERDE DE LA 2° IMAGEN */
+    color: white;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header .logo img {
+    width: 100px;
+    height: 100px;
+}
+
+header h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+    background: #007a32;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+/* ===== CONTENIDO ===== */
+main {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* FORMULARIO */
+.form-box {
+    width: 350px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 6px rgba(0,0,0,0.2);
+}
+
+.form-box h2 {
+    margin-bottom: 15px;
+}
+
+.form-box input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    border: 2px solid #00883E;
+    border-radius: 5px;
+}
+
+.botones {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    background: #00883E;
+    color: white;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #00883E;
+}
+
+/* TABLA */
+.tabla-box {
+    margin-top: 40px;
+}
+
+table {
+    width: 60%;
+    margin: auto;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 2px solid #00883E;
+    padding: 10px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+    font-size: 14px;
+}
+.boton-mapa {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;            /* ← ESTO LO PONE A LA DERECHA */
+    background: #00883E;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px
+}
+
+
+
+.boton-mapa:hover {
+    background: #006B32;
+    transform: scale(1.05);
+}

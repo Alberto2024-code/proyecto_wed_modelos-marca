@@ -11,6 +11,12 @@ if (isset($_POST["guardar"])) {
 
 // CONSULTAR
 $resultado = $conexion->query("SELECT idMarcas, marcas FROM marca");
+if (isset($_GET["eliminar"])) {
+    $id = $_GET["eliminar"];
+    $conexion->query("DELETE FROM marca WHERE idMarcas = $id");
+    header("Location: Marca.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -20,7 +26,7 @@ $resultado = $conexion->query("SELECT idMarcas, marcas FROM marca");
     <title>Registro de Marca</title>
 
     <!-- TU CSS ORIGINAL -->
-    <link rel="stylesheet" href="Modelo.css">
+    <link rel="stylesheet" href="Marca.css">
 </head>
 <body>
 
@@ -33,7 +39,7 @@ $resultado = $conexion->query("SELECT idMarcas, marcas FROM marca");
         <h1>Registrar Marca</h1>
 
         <nav>
-            <a href="index.php">Inicio</a>
+            <a href="modelo.php">Modelo</a>
             <a href="Marca.php">Marcas</a>
             <a href="#">Historial</a>
         </nav>
@@ -67,6 +73,7 @@ $resultado = $conexion->query("SELECT idMarcas, marcas FROM marca");
                     <tr>
                         <th>ID</th>
                         <th>Marca</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
 
@@ -75,6 +82,9 @@ $resultado = $conexion->query("SELECT idMarcas, marcas FROM marca");
                         <tr>
                             <td><?= $fila['idMarcas'] ?></td>
                             <td><?= $fila['marcas'] ?></td>
+                             <td>
+                            <a href="Marca.php?eliminar=<?= $fila['idMarcas'] ?>" onclick="return confirm('¿Eliminar marcas?')"> Eliminar</a>
+                        </td>
                         </tr>
                     <?php endwhile; ?>
                 </tbody>
