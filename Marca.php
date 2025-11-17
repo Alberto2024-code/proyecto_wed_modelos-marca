@@ -50,12 +50,12 @@ if (isset($_GET["eliminar"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Marca</title>
 
-    <!-- TU CSS ORIGINAL -->
+    
     <link rel="stylesheet" href="Marca.css">
 </head>
 <body>
 
-    <!-- HEADER ORIGINAL -->
+  
     <header>
         <div class="logo">
             <img src="img/3a9737f7-0db2-4014-9c08-de5db4e5a5f5.jpg" alt="Logo" />
@@ -70,7 +70,7 @@ if (isset($_GET["eliminar"])) {
         </nav>
     </header>
 
-    <!-- CONTENIDO EN CAJAS COMO LO TENÍAS -->
+   
     <main>
 
         <!-- FORMULARIO -->

@@ -85,7 +85,7 @@ if (isset($_GET["eliminar"])) {
 </head>
 <body>
 
-<!-- HEADER -->
+
 <header>
     <div class="logo">
             <img src="img/3a9737f7-0db2-4014-9c08-de5db4e5a5f5.jpg" alt="Logo" />
@@ -179,7 +179,7 @@ if (isset($_GET["eliminar"])) {
 
 </main>
 
-<!-- BOTÓN DEL MAPA -->
+
 <button class="boton-mapa" onclick="location.href='mapa.php'">Mapa de navegación</button>
  
  <footer>
