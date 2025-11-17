@@ -8,6 +8,31 @@ if (isset($_POST["guardar"])) {
         $conexion->query("INSERT INTO marca (marcas) VALUES ('$marca')");
     }
 }
+/* ----------------------- CARGAR DATOS PARA EDITAR ----------------------- */
+$idEditar = "";
+$marcaEditar = "";
+
+if (isset($_GET["actualizar"])) {
+    $idEditar = $_GET["actualizar"];
+
+    $busqueda = $conexion->query("SELECT * FROM marca WHERE idMarcas = $idEditar");
+    $datos = $busqueda->fetch_assoc();
+
+    $marcaEditar = $datos["marcas"];
+}
+
+/* ----------------------- ACTUALIZAR MARCA ----------------------- */
+if (isset($_POST["editar"])) {
+    $id = $_POST["idEditar"];
+    $marca = $_POST["marcas"];
+
+    $conexion->query("UPDATE marca 
+                      SET marcas='$marca' 
+                      WHERE idMarcas=$id");
+
+    header("Location: Marca.php");
+    exit;
+}
 
 // CONSULTAR
 $resultado = $conexion->query("SELECT idMarcas, marcas FROM marca");
@@ -50,19 +75,31 @@ if (isset($_GET["eliminar"])) {
 
         <!-- FORMULARIO -->
         <section class="form-box">
-            <h2>Registrar Marca</h2>
+    <h2><?= $idEditar ? "Editar Marca" : "Registrar Marca" ?></h2>
 
-            <form method="POST">
-                <label>Nombre de la marca:</label>
-                <input type="text" name="marcas" placeholder="Ingresa el nombre de la marca" required>
+    <form method="POST">
 
-                <div class="botones">
-                    <button type="submit" name="guardar">Guardar</button>
-                    <button type="reset">Cancelar</button>
-                </div>
-                
-            </form>
-        </section>
+        <input type="hidden" name="idEditar" value="<?= $idEditar ?>">
+
+        <label>Nombre de la marca:</label>
+        <input type="text" name="marcas" 
+               value="<?= $marcaEditar ?>" 
+               placeholder="Ingresa el nombre de la marca" required>
+
+        <div class="botones">
+
+            <?php if ($idEditar): ?>
+                <button type="submit" name="editar">Actualizar</button>
+                <a href="Marca.php">Cancelar</a>
+            <?php else: ?>
+                <button type="submit" name="guardar">Guardar</button>
+                <button type="reset">Cancelar</button>
+            <?php endif; ?>
+
+        </div>
+        
+    </form>
+</section>
 
         <!-- TABLA -->
         <section class="tabla-box">
@@ -83,6 +120,7 @@ if (isset($_GET["eliminar"])) {
                             <td><?= $fila['idMarcas'] ?></td>
                             <td><?= $fila['marcas'] ?></td>
                              <td>
+                         <a href="Marca.php?actualizar=<?= $fila['idMarcas'] ?>">Actualizar</a>
                             <a href="Marca.php?eliminar=<?= $fila['idMarcas'] ?>" onclick="return confirm('¿Eliminar marcas?')"> Eliminar</a>
                         </td>
                         </tr>

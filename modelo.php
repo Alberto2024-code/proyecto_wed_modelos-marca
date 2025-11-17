@@ -10,6 +10,47 @@ if (isset($_POST["guardar"])) {
         $conexion->query("INSERT INTO modelos (modelos, idMarca) VALUES ('$nombreModelo', '$idMarca')");
     }
 }
+/* -----------------------se carga los modelo para que sean editados----------------------- */
+$idEditar = "";
+$modeloEditar = "";
+$marcaEditar = "";
+
+if (isset($_GET["actualizar"])) {
+    $idEditar = $_GET["actualizar"];
+
+    $busqueda = $conexion->query("SELECT * FROM modelos WHERE idModelo = $idEditar");
+    $datos = $busqueda->fetch_assoc();
+
+    if ($datos) {
+        $modeloEditar = $datos["modelos"];
+        $marcaEditar = $datos["idMarca"];
+    }
+}
+
+/* ----------------------- se actualzan los modelos ----------------------- */
+if (isset($_POST["editar"])) {
+    $id = $_POST["idEditar"];
+    $modelo = $_POST["modelo"];
+    $marca = $_POST["marca"];
+
+   $conexion->query("UPDATE modelos 
+                  SET modelos='$modelo', idMarca='$marca'
+                  WHERE idModelo=$id");
+
+    header("Location: modelo.php");
+    exit;
+}
+
+/* ----------------------- se condultan los modelos ----------------------- */
+$sql = "
+    SELECT 
+        modelos.idModelo, 
+        modelos.modelos AS nombreModelo, 
+        marca.marcas AS nombreMarca
+    FROM modelos
+    LEFT JOIN marca ON modelos.idMarca = marca.idMarcas
+";
+$resultado = $conexion->query($sql);
 
 /* ----------------------- CONSULTAR MODELOS ----------------------- */
 $sql = "
@@ -66,23 +107,44 @@ if (isset($_GET["eliminar"])) {
     <section class="form-box">
         <h2>Registrar Modelo</h2>
 
-        <form method="POST">
-            <label>Nombre del modelo:</label>
-            <input type="text" name="modelo" placeholder="Ingresa el nombre del modelo" required>
+       <form method="POST">
+    <input type="hidden" name="idEditar" value="<?= $idEditar ?>">
 
-            <label>Marca:</label>
-            <select name="marca" required>
-                <option value="">Seleccione una marca</option>
-                <?php while ($fila = $marcas->fetch_assoc()): ?>
-                    <option value="<?= $fila['idMarcas'] ?>"><?= $fila['marcas'] ?></option>
-                <?php endwhile; ?>
-            </select>
+    <label>Nombre del modelo:</label>
+    <input 
+        type="text" 
+        name="modelo" 
+        value="<?= $modeloEditar ?>" 
+        placeholder="Ingresa el nombre del modelo" 
+        required
+    >
 
-            <div class="botones">
-                <button type="submit" name="guardar">Guardar</button>
-                <button type="reset">Cancelar</button>
-            </div>
-        </form>
+    <label>Marca:</label>
+    <select name="marca" required>
+        <option value="">Seleccione una marca</option>
+
+        <?php
+        $marcas2 = $conexion->query("SELECT idMarcas, marcas FROM marca");
+        while ($fila = $marcas2->fetch_assoc()):
+        ?>
+            <option value="<?= $fila['idMarcas'] ?>"
+                <?= ($fila['idMarcas'] == $marcaEditar) ? 'selected' : '' ?>>
+                <?= $fila['marcas'] ?>
+            </option>
+        <?php endwhile; ?>
+    </select>
+
+    <div class="botones">
+        <?php if ($idEditar != ""): ?>
+            <button type="submit" name="editar">Actualizar</button>
+        <?php else: ?>
+            <button type="submit" name="guardar">Guardar</button>
+        <?php endif; ?>
+
+        <button type="reset">Cancelar</button>
+    </div>
+</form>
+
     </section>
 
     <!-- TABLA -->
@@ -105,7 +167,9 @@ if (isset($_GET["eliminar"])) {
                         <td><?= $fila['nombreModelo'] ?></td>
                         <td><?= $fila['nombreMarca'] ?></td>
                         <td>
-                            <a href="Modelos.php?eliminar=<?= $fila['idModelo'] ?>" onclick="return confirm('¿Eliminar modelo?')"> Eliminar</a>
+                            <a href="modelo.php?actualizar=<?= $fila['idModelo'] ?>"> Actualizar</a> 
+                            <a href="modelo.php?eliminar=<?= $fila['idModelo'] ?>" onclick="return confirm('¿Eliminar modelo?')"> Eliminar</a>
+                            
                         </td>
                     </tr>
                 <?php endwhile; ?>

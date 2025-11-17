@@ -124,7 +124,8 @@ footer {
 
 
 
-.boton-mapa:hover {
+.boton-mapa:hover 
+{
     background: #006B32;
     transform: scale(1.05);
 }
