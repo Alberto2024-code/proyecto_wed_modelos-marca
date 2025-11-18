@@ -98,6 +98,23 @@ table th, table td {
     border: 2px solid #00883E;
     padding: 10px;
 }
+/* BOTONES DE ACCIÓN QUE CAMBIA EL COLOR A #333 */
+table td a {
+    display: inline-block;
+    padding: 4px 10px;
+    background: #333 !important;
+    color: white !important;
+    text-decoration: none !important;
+    font-size: 12px;
+    border-radius: 4px;
+    border: 1px solid white;
+    margin-right: 5px;
+}
+
+/* Hover */
+table td a:hover {
+    background: #555 !important;
+}
 
 /* ===== FOOTER ===== */
 footer {
@@ -108,23 +125,5 @@ footer {
     margin-top: 40px;
     font-size: 14px;
 }
-.boton-mapa {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;            /* ← ESTO LO PONE A LA DERECHA */
-    background: #00883E;
-    color: white;
-    padding: 12px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0 4px
-}
 
 
-
-.boton-mapa:hover {
-    background: #006B32;
-    transform: scale(1.05);
-}

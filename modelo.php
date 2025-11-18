@@ -81,7 +81,7 @@ if (isset($_GET["eliminar"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Modelos</title>
-    <link rel="stylesheet" href="Marca.css">
+    <link rel="stylesheet" href="modelo.css">
 </head>
 <body>
 
@@ -91,12 +91,14 @@ if (isset($_GET["eliminar"])) {
             <img src="img/3a9737f7-0db2-4014-9c08-de5db4e5a5f5.jpg" alt="Logo" />
         </div>
 
-        <h1>Registrar Modelo</h1>
+        <h1>REGISTRAR MODELO</h1>
 
         <nav>
-            <a href="index.php">Inicio</a>
-            <a href="Marca.php">Marcas</a>
-            <a href="#">Historial</a>
+             <a href="Mapa_de_sitio.php">MAPA DE SITIO</a>
+            <a href="MARCA.php">MARCA</a>
+            <a href="Dispositivos.php">DISPOSITIVOS</a>
+            <a href="Usuarios">USUARIOS</a>
+            <a href="Menu.php">MENU PRINCIPAL</a>
         </nav>
     
 </header>
@@ -180,12 +182,10 @@ if (isset($_GET["eliminar"])) {
 </main>
 
 
-<button class="boton-mapa" onclick="location.href='mapa.php'">Mapa de navegación</button>
- 
+
  <footer>
-        <p>Carretera Huejutla - Chalmahuivapa S/N, C.P. 43000, Huejutla de Reyes, Hidalgo.</p>
-        <p>E-mail: rectoria@uthh.edu.mx</p>
-        <p>Universidad Tecnológica de la Huasteca Hidalguense</p>
+        <p>Derechos de autor @2025 mantenimiento de computo todos los de rechos reservados</p>
+        
 </footer>
 </body>
  

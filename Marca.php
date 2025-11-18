@@ -61,12 +61,14 @@ if (isset($_GET["eliminar"])) {
             <img src="img/3a9737f7-0db2-4014-9c08-de5db4e5a5f5.jpg" alt="Logo" />
         </div>
 
-        <h1>Registrar Marca</h1>
+        <h1>REGISTRAR MARCA</h1>
 
         <nav>
-            <a href="modelo.php">Modelo</a>
-            <a href="Marca.php">Marcas</a>
-            <a href="#">Historial</a>
+            <a href="Mapa_de_sitio.php">MAPA DE SITIO</a>
+            <a href="Modelo.php">MODELO</a>
+            <a href="Dispositivos.php">DISPOSITIVOS</a>
+            <a href="Usuarios">USUARIOS</a>
+            <a href="Menu.php">MENU PRINCIPAL</a>
         </nav>
     </header>
 
@@ -103,7 +105,7 @@ if (isset($_GET["eliminar"])) {
 
         <!-- TABLA -->
         <section class="tabla-box">
-            <h2>Tabla de Marcas</h2>
+            <h2>Marcas Registrados</h2>
 
             <table>
                 <thead>
@@ -131,9 +133,7 @@ if (isset($_GET["eliminar"])) {
         </section>
          
     </main>
-<button class="boton-mapa" onclick="location.href='mapa.php'">
-    Mapa de navegación
-</button>
+
     <!-- FOOTER -->
     <footer>
         <p>Carretera Huejutla - Chalmahuivapa S/N, C.P. 43000, Huejutla de Reyes, Hidalgo.</p>
