@@ -69,6 +69,7 @@ if (isset($_GET["eliminar"])) {
             <a href="Dispositivos.php">DISPOSITIVOS</a>
             <a href="Usuarios">USUARIOS</a>
             <a href="Menu.php">MENU PRINCIPAL</a>
+             <a href="Dispositivos.php">dis</a>
         </nav>
     </header>
 
