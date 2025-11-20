@@ -1,8 +1,18 @@
 <?php
 require_once "conexion.php";
 
-$resultado = $conexion->query("SELECT * FROM tipodispositivo");
-
+$resultado = $conexion->query("
+SELECT d.idDispositivo,
+       t.tipoDispositivo,
+       d.nombreDispositivo,
+       m.modelos,
+       l.laboratorios,
+       d.numeroInventario
+FROM dispositivos d
+LEFT JOIN tipodispositivo t ON d.idTipoDispositivo = t.idTipoDispositivo
+LEFT JOIN modelos m ON d.idModelo = m.idModelo
+LEFT JOIN laboratorios l ON d.idLaboratorio = l.idLaboratorio
+");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -36,7 +46,11 @@ $resultado = $conexion->query("SELECT * FROM tipodispositivo");
     <thead>
         <tr>
             <th>ID</th>
-            <th>Dispositivo</th>
+            <th>Tipo dispositivo</th>
+            <th>Nombre dispositivo</th>
+            <th>Modelo</th>
+            <th>Laboratorio</th>
+            <th>Numero inventario</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -44,11 +58,17 @@ $resultado = $conexion->query("SELECT * FROM tipodispositivo");
     <tbody>
         <?php while ($fila = $resultado->fetch_assoc()): ?>
             <tr>
-                <td><?= $fila['idTipoDispositivo'] ?></td>
+                <td><?= $fila['idDispositivo'] ?></td>
                 <td><?= $fila['tipoDispositivo'] ?></td>
+                <td><?= $fila['nombreDispositivo'] ?></td>
+                <td><?= $fila['modelos'] ?></td>
+                <td><?= $fila['laboratorios'] ?></td>
+                <td><?= $fila['numeroInventario'] ?></td>
+                
                 <td>
-                    <a href="ActualizarDisp.php?id=<?= $fila['idTipoDispositivo'] ?>">Actualizar</a>
-                    <a href="?id=<?= $fila['idTipoDispositivo'] ?>" onclick="return confirm('¿Eliminar dispositivo?')">Eliminar</a>
+                    <a href="ActualizarDisp.php?id=<?= $fila['idDispositivo'] ?>">Actualizar</a>
+                    <a href="eliminarDis.php?id=<?= $fila['idDispositivo'] ?>" onclick="return confirm('¿Eliminar dispositivo?')">Eliminar</a>
+
                 </td>
             </tr>
         <?php endwhile; ?>

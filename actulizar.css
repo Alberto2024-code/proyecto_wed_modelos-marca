@@ -51,67 +51,77 @@ main {
 
 
 /* ===== FORMULARIO (ESTILO SEGUNDO EJEMPLO) ===== */
-.form-box {
-    width: 350px;
-    background: white;
+/* ===== FORMULARIO DE ACTUALIZAR ===== */
+form {
+    width: 350px;                /* Igual que registrar */
+    margin: 0 auto;              /* Centrado horizontal */
     padding: 25px;
     border-radius: 10px;
-    box-shadow: 0px 0px 6px rgba(0,0,0,0.2);
     border: 2px solid #00883E;
-    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+    background: white;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;     /* Centra contenido vertical dentro del form */
 }
 
-.form-box h2 {
+form h2 {
     margin-bottom: 15px;
-    color: #333;
+    color: #00883E;
 }
 
-.form-box label {
+form label {
     width: 100%;
     text-align: left;
     font-weight: bold;
+    margin-top: 10px;
     margin-bottom: 5px;
 }
 
-.form-box input {
+form input[type="text"] {
     width: 100%;
     padding: 10px;
-    margin-top: 8px;
-    margin-bottom: 20px;
     border: 2px solid #00883E;
-    border-radius: 5px;
-}
-select, input {
-    display: flex;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #aaa;
-    width: 300px;
+    border-radius: 6px;
+    margin-bottom: 20px;
 }
 
-.botones {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-}
-
-
-button {
+form button {
     padding: 10px 15px;
     border: none;
     background: #00883E;
     color: white;
-    font-size: 15px;
     border-radius: 6px;
     cursor: pointer;
-    min-width: 120px;
+    width: 48%;
+    margin-right: 4%;
 }
 
-button:hover {
+form button:hover {
     background: #006F33;
 }
+
+form a {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #333;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    text-align: center;
+    width: 48%;
+}
+
+form a:hover {
+    background: #555;
+}
+
+form .botones {
+    display: flex;
+    justify-content: space-between;
+}
+
 
 /* ===== TABLA ===== */
 .tabla-box {
@@ -125,7 +135,7 @@ button:hover {
 
 table {
     width: 70%;
-    max-width: 1900px;
+    max-width: 900px;
     border-collapse: collapse;
     background: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
@@ -170,4 +180,3 @@ footer {
     margin-top: 40px;
     font-size: 14px;
 }
-

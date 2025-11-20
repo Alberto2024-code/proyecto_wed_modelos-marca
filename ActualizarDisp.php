@@ -1,15 +1,22 @@
 <?php
 require_once "conexion.php";
 
-
+/* -----------------------------------------
+   VALIDAR ID
+----------------------------------------- */
 if (!isset($_GET['id'])) {
     die("Error: No se recibió ID.");
 }
 
-$id = $_GET['id'];
+$id = intval($_GET['id']);
 
-
-$sql = $conexion->query("SELECT * FROM tipodispositivo WHERE idTipoDispositivo = $id");
+/* -----------------------------------------
+   OBTENER DATOS DEL DISPOSITIVO
+----------------------------------------- */
+$sql = $conexion->query("
+SELECT * FROM dispositivos 
+WHERE idDispositivo = $id
+");
 
 if ($sql->num_rows == 0) {
     die("Error: El dispositivo no existe.");
@@ -17,20 +24,30 @@ if ($sql->num_rows == 0) {
 
 $datos = $sql->fetch_assoc();
 
-
+/* -----------------------------------------
+   ACTUALIZAR DATOS
+----------------------------------------- */
 if (isset($_POST["editar"])) {
 
-    $tipoDispositivo = $_POST["tipoDispositivo"];
+    $nombre = $_POST["nombreDispositivo"];
+    $inventario = $_POST["numeroInventario"];
+    $tipo = $_POST["tipoDispositivo"];
+    $modelo = $_POST["modelo"];
+    $lab = $_POST["laboratorios"];
 
-    if (!empty($tipoDispositivo)) {
+    if (!empty($nombre) && !empty($inventario)) {
 
         $conexion->query("
-            UPDATE tipodispositivo 
-            SET tipoDispositivo = '$tipoDispositivo'
-            WHERE idTipoDispositivo = $id
+            UPDATE dispositivos SET 
+                nombreDispositivo = '$nombre',
+                numeroInventario = '$inventario',
+                idTipoDispositivo = $tipo,
+                idModelo = $modelo,
+                idLaboratorio = $lab
+            WHERE idDispositivo = $id
         ");
 
-        header("Location: RegistroDisp.php"); // Regresar a la lista
+        header("Location: Dispositivos.php");
         exit();
     }
 }
@@ -39,44 +56,72 @@ if (isset($_POST["editar"])) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Dispositivos Registrados</title>
-    <link rel="stylesheet" href="dispositivos.css">
+    <title>Actualizar dispositivo</title>
+    <link rel="stylesheet" href="actulizar.css">
 </head>
 <body>
 
 <header>
     <div class="logo">
-        <img src="img/3a9737f7-0db2-4014-9c08-de5db4e5a5f5.jpg" alt="Logo" />
+        <img src="img/3a9737f7-0db2-4014-9c08-de5db4e5a5f5.jpg" alt="Logo">
     </div>
 
-    <h1>DISPOSITIVOS REGISTRADOS</h1>
-
-    <nav>
-        <a href="Mapa_de_sitio.php">MAPA DE SITIO</a>
-        <a href="Modelo.php">MODELO</a>
-        <a href="Dispositivos.php">DISPOSITIVOS</a>
-        <a href="Usuarios">USUARIOS</a>
-        <a href="Menu.php">MENU PRINCIPAL</a>
-        <a href="Dispositivos.php">dis</a>
-    </nav>
+    <h1>ACTUALIZAR DISPOSITIVO</h1>
 </header>
 
-<h2>Lista de dispositivos</h2>
-
 <form method="POST">
-    <input type="hidden" name="id" value="<?= $datos['idTipoDispositivo'] ?>">
+
+    <label>Nombre del dispositivo:</label>
+    <input type="text" name="nombreDispositivo" value="<?= $datos['nombreDispositivo'] ?>" required>
+
+    <label>Número de inventario:</label>
+    <input type="text" name="numeroInventario" value="<?= $datos['numeroInventario'] ?>" required>
 
     <label>Tipo de dispositivo:</label>
-    <input type="text" name="tipoDispositivo" value="<?= $datos['tipoDispositivo'] ?>" required>
+    <select name="tipoDispositivo" required>
+        <?php
+        $tipos = $conexion->query("SELECT * FROM tipodispositivo");
+        while ($t = $tipos->fetch_assoc()):
+        ?>
+        <option value="<?= $t['idTipoDispositivo'] ?>"
+            <?= ($t['idTipoDispositivo'] == $datos['idTipoDispositivo']) ? 'selected' : '' ?>>
+            <?= $t['tipoDispositivo'] ?>
+        </option>
+        <?php endwhile; ?>
+    </select>
+
+    <label>Modelo:</label>
+    <select name="modelo" required>
+        <?php
+        $modelos = $conexion->query("SELECT * FROM modelos");
+        while ($m = $modelos->fetch_assoc()):
+        ?>
+        <option value="<?= $m['idModelo'] ?>"
+            <?= ($m['idModelo'] == $datos['idModelo']) ? 'selected' : '' ?>>
+            <?= $m['modelos'] ?>
+        </option>
+        <?php endwhile; ?>
+    </select>
+
+    <label>Laboratorio:</label>
+    <select name="laboratorios" required>
+        <?php
+        $labs = $conexion->query("SELECT * FROM laboratorios");
+        while ($l = $labs->fetch_assoc()):
+        ?>
+        <option value="<?= $l['idLaboratorio'] ?>"
+            <?= ($l['idLaboratorio'] == $datos['idLaboratorio']) ? 'selected' : '' ?>>
+            <?= $l['laboratorios'] ?>
+        </option>
+        <?php endwhile; ?>
+    </select>
 
     <button type="submit" name="editar">Actualizar</button>
-    <a href="RegistroDisp.php">Cancelar</a>
+    <a href="Dispositivos.php">Cancelar</a>
+
 </form>
 
-<footer>
-        <p>Derechos de autor @2025 mantenimiento de computo todos los de rechos reservados</p>
-        
-</footer>
 </body>
 </html>
+
 
